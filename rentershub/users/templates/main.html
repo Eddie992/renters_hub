@@ -1,0 +1,154 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Renters Hub</title>
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+   <link href="{% static 'users/css/style.css' %}" rel="stylesheet" />
+</head>
+<body>
+<!--NAVIGATION BAR-->
+<div class="container-fluid">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-0 border-bottom ">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <img src="{% static 'users/assets/house-heart-fill.svg' %}" alt="house-heart-icon" height="30">
+          <span class="fs-4">Renters Hub</span>
+        </a>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="/" class="nav-link px-2 link-secondary">Home</a></li>
+        <li><a href="{% url 'view_properties' %}" class="nav-link px-2">Browse Listings</a></li>
+        <li><a href="{% url 'listing' %}" class="nav-link px-2">Post a Listing</a></li>
+        
+      </ul>
+{% if user.is_authenticated %}
+    <div class="col-md-3 text-end">
+        <h6>Hi {{ user.first_name }}!</h6>
+        <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-outline-dark btn-sm">Logout</button>
+        </form>
+{% else %}        
+    <div class="col-md-3 text-end">
+        <a href="{% url 'login' %}"><button type="button" class="btn btn-warning me-2">Login</button></a>
+        <a href="{% url 'register' %}"><button type="button" class="btn btn-dark">Sign-up</button></a>
+      </div>
+{% endif %}      
+    </header>
+  </div>
+<!--END OF NAVIGATION BAR-->
+{% block content %}
+
+<!--HERO SECTION-->
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+      <div class="col-10 col-sm-8 col-lg-6">
+        <img src="{% static 'users/assets/forent.jpg'%}" class="d-block mx-lg-auto img-fluid" alt="Image by vectorjuice on Freepik" width="700" height="500" loading="lazy">
+      </div>
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-semibold lh-1 mb-3 hero-text">Your Next Home Awaits!</h1>
+        <p class="lead">Looking for the perfect place to call home? Whether it’s a cozy house, a private guest wing, a convenient boys' quarter, 
+        a modern flat, or a comfortable hostel, Renters Hub is here to help you find exactly what you need. And the best part? It’s completely free. 
+        We've made it easier for you to discover the right property, so you can focus on what truly matters—making it your own.</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+          <a href="{% url 'view_properties' %}"><button type="button" class="btn btn-warning btn-lg px-4 me-md-2">Find a Home</button></a>
+          <a href="{% url 'listing'%}"><button type="button" class="btn btn-light btn-lg px-4">List your Property</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--END OF HERO SECTION-->
+<!--FEATURES SECTION-->
+<div class="container px-4 py-5" id="hanging-icons">
+  <h4 class="pb-2 border-bottom"></h4>
+  <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div class="col d-flex align-items-start">
+      <div class="card" id="feature-card">
+        <img src="{% static 'users/assets/bluehouse.jpg'%}" class="card-img-top" alt="bluehouse-image by freepik">
+        <div class="card-body">
+          <h5 class="card-title">Find Your Perfect Home, Effortlessly.</h5>
+          <p class="card-text lead">Discover millions of properties across Malawi. Connect directly with landlords or agents to find your ideal rental. Your dream home awaits!</p>
+        </div>
+      </div>
+    </div>
+    <div class="col d-flex align-items-start">
+      <div class="card" id="feature-card">
+        <img src="{% static 'users/assets/manwithkey.jpg'%}" class="card-img-top" alt="manwithkey-imagebyfreepik">
+        <div class="card-body">
+          <h5 class="card-title">Meet Your Ideal Tenant.</h5>
+          <p class="card-text lead">Find qualified tenants quickly and easily. Interview potential renters before committing to a lease.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col d-flex align-items-start">
+      <div class="card" id="feature-card">
+        <img src="{% static 'users/assets/agent1.jpg'%}" class="card-img-top" alt="imageofagent by freepik">
+        <div class="card-body">
+          <h5 class="card-title">Close More Deals.</h5>
+          <p class="card-text lead">Connect with motivated clients looking for their perfect rental. Streamline your workflow and close more deals with ease.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--END OF FEATURES SECTION-->
+{% endblock %}
+  <!--FOOTER-->
+<div class="container-fluid">
+    <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-0 border-top">
+      <div class="col mb-3">
+        <a href="/" class="d-flex align-items-center mb-3 link-body-emphasis text-decoration-none">
+        <img src="{% static 'users/assets/house-heart-fill.svg' %}" alt="house-heart-icon" height="30">
+        </a>
+        <p class="text-body-secondary fw-semibold">© 2024 Renters Hub.</p>
+      </div>
+  
+      <div class="col mb-3">
+  
+      </div>
+  
+      <div class="col mb-3">
+        <h5>Explore</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Find a Home</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'view_properties' %}" class="nav-link p-0 text-body-secondary">Browse Listings</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Contact Landlords & Agents</a></li>
+        </ul>
+      </div>
+  
+      <div class="col mb-3">
+        <h5>Landlords & Agents</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><a href="{% url 'listing' %}" class="nav-link p-0 text-body-secondary">List your property</a></li>
+          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Find Ideal Tenants</a></li>
+          <li class="nav-item mb-2"><a href="{% url 'register' %}" class="nav-link p-0 text-body-secondary">Get Started for Free</a></li>
+        </ul>
+      </div>
+  
+      <div class="col mb-3">
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2"><img src="{% static 'users/assets/facebook.svg' %}" alt="Facebook-icon" height="20"></li>
+          <li class="nav-item mb-2"><img src="{% static 'users/assets/twitter-x.svg' %}" alt="twitter-x-icon" height="20"></li>
+          <li class="nav-item mb-2"><img src="{% static 'users/assets/instagram.svg' %}" alt="Facebook-icon" height="20"></li>
+          <li class="nav-item mb-2"><img src="{% static 'users/assets/whatsapp.svg' %}" alt="whatsapp-icon" height="20"></li>
+        </ul>
+      </div>
+    </footer>
+  </div>
+<!--END OF FOOTER-->  
+   
+   
+   
+   
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+</body>
+</html>

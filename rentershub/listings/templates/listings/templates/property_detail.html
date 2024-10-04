@@ -1,0 +1,57 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid bg-body-tertiary m-0">
+    <div class="container my-0 py-3">
+        <div class="col-12 mb-4">
+            <div class="card border-warning shadow-sm h-80 w-100">
+                <!-- Carousel -->
+                <div id="carousel{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image in property.propertyimages_set.all %}
+                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                <img src="{{ image.image.url }}" class="d-block card-img-top" alt="Image for {{ property.property_type }}" id="property-detail-img">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ forloop.counter }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true" id="property-detail-icon"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ forloop.counter }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true" id="property-detail-icon"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title lead fs-3"><img src="{% static 'users/assets/house-icon.png' %}" alt="house-icon by freepik" height="40">  {{ property.property_type }} </h1>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item lead" id="property-detail-list"><img src="{% static 'users/assets/location-pin.svg' %}" alt="geo-alt" height="40">  Location : {{property.city}} - {{ property.location }}</li>
+                        <li class="list-group-item lead" id="property-detail-list"><img src="{% static 'users/assets/price-tag.svg' %}" alt="" height="40"> Rent Price: MWK {{ property.price|floatformat:"-3g" }}</li>
+                        <li class="list-group-item lead" id="property-detail-list"><img src="{% static 'users/assets/Bedroom.svg' %}" alt="geo-alt" height="40"> Number of Bedrooms : {{ property.bedrooms }}</li>
+                        <li class="list-group-item lead" id="property-detail-list"><img src="{% static 'users/assets/bathroom-toilet.svg' %}" alt="bathroom-toilet icon" height="40"> Bathrooms : {{ property.bathrooms }} | Toilets :  {{ property.toilets }}</li>
+                        <li class="list-group-item lead" id="property-detail-list"><img src="{% static 'users/assets/electricity.svg' %}" alt="electricity icon" height="40"> Electricity : {{ property.electricity|yesno:"Yes,No" }} | Water :  {{ property.water|yesno:"Yes,No" }}</li>
+                        <li class="list-group-item lead" id="property-detail-list"><img src="{% static 'users/assets/date.svg' %}" alt="date-icon" height="40"> Date Posted : {{ property.date_posted|date:"l, j F Y." }} </li>
+                        <li class="list-group-item lead" id="property-detail-list"><img src="{% static 'users/assets/rent-sign.svg' %}" alt="rent-sign-icon" height="40"> Availability :  {% if property.available %}  Vacant {% else %} Occupied {% endif %} </li>
+                        <li class="list-group-item lead" id="property-detail-list"><img src="{% static 'users/assets/profile.svg' %}" alt="profile-icon" height="40"> Posted by : {{ property.posted_by }}</li>
+                    </ul>
+                    <div class="mt-3">
+                        <label for="property-description" class="form-label lead"><img src="{% static 'users/assets/view-details.svg' %}" alt="details-icon" height="40"> Description : </label>
+                        <textarea id="property-description" class="form-control" rows="5" readonly>{{ property.description }}</textarea>
+                    </div>
+                    <div class="card-footer d-flex justify-content-center bg-transparent"> 
+                        {% if property.posted_by == request.user  %}
+                        <a href="{% url 'update-post' property.pk %}"><button type="button" class="btn btn-dark m-1">Edit</button></a>
+                        <a href="{% url 'delete-post' property.pk %}"><button type="button" class="btn btn-dark m-1">Delete</button></a>
+                        {% endif %}
+                        <a href="{% url 'view_properties' %}"><button type="button" class="btn btn-dark m-1">Back</button></a>
+                    </div>
+                </div>   
+            </div>   
+        </div>   
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="container-fluid bg-body-tertiary"> 
+    <div class="container my-0 py-5">
+        <div class="card my-4" id="uploads" >
+            <div class="card-body">
+                <h5 class="card-title text-center">Upload a New Property</h5>
+                    <form method = "post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form }}
+                        <input class="d-block py-4" type="file" name="images" multiple required>
+                        <button type="submit" class="btn btn-lg btn-dark">Upload</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock  %}

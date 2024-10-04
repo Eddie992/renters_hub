@@ -1,0 +1,48 @@
+{% extends "main.html" %}
+{% load static %}
+{% block content %}
+<div class="container-fluid bg-body-tertiary m-0">
+<div class="container my-0 py-0">
+<div class="row py-4">
+    {% for property in listing %}
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="card border-warning shadow-sm h-100">
+            <!-- Carousel -->
+            <div id="carousel{{ forloop.counter }}" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in property.propertyimages_set.all %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ image.image.url }}" class="d-block w-100 card-img-top" alt="Image for {{ property.property_type }}" id="listings-img">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ forloop.counter }}" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ forloop.counter }}" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <!-- End Carousel -->
+            <div class="card-body">
+                    <h6 class="card-title fw-semibold">{{ property.property_type }}</h6>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><img src="{% static 'users/assets/location-pin.svg' %}" alt="geo-alt" height="20"> {{property.city}} - {{ property.location }}</li>
+                        <li class="list-group-item"><img src="{% static 'users/assets/price-tag.svg' %}" alt="" height="20"> MWK {{ property.price|floatformat:"-3g" }}</small></li>
+                        <li class="list-group-item"><small class="card-text"><img src="{% static 'users/assets/Bedroom.svg' %}" alt="geo-alt" height="20"> {{ property.bedrooms }}</small> |
+                          <small class="card-text"><img src="{% static 'users/assets/bathroom.svg'%}" alt="geo-alt" height="20"> {{ property.bathrooms }}</small></li>
+                        <li class="list-group-item"><small class="card-text"><img src="{% static 'users/assets/available.png' %}" alt="geo-alt" height="20"> : {% if property.available %}  Available {% else %} Occupied {% endif %}</small></li>                                         
+            </div>
+            <div class="card-footer  d-flex justify-content-between align-items-center"> 
+                <a href="{% url 'property-detail' property.pk %}"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
+                <small class="text-body-secondary">{{ property.date_posted|date:"j-M-y H:i" }}</small>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+</div>
+{% endblock  %}
