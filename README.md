@@ -17,6 +17,7 @@ Renters Hub is a web application designed to assist users in finding and listing
 Renters Hub aims to simplify the property rental process by providing a user-friendly platform where property owners and renters can interact. Users can list properties with detailed descriptions and images, browse listings, and engage in real-time chat for inquiries.
 
 **Author**: Edward Kataika 
+
 **Project Status**: Ongoing
 
 ## **Features**
@@ -69,7 +70,7 @@ Renters Hub aims to simplify the property rental process by providing a user-fri
 - **Backend**: Django, Django REST Framework
 - **Database**: PostgreSQL
 - **Frontend**: HTML5, CSS3, Bootstrap 5
-- **Real-Time Communication**: Django Channels (for WebSockets and asynchronous features)
+- **Real-Time Communication**: Django Channels (for WebSockets and asynchronous features)(Planned)
 - **Deployment**: Heroku (planned)
 - **Other Services**: Google Maps API (for displaying property locations)
 
@@ -77,7 +78,7 @@ Renters Hub aims to simplify the property rental process by providing a user-fri
 
 1. **Register** as a new user (either a property owner or renter).
 2. **Post a property** if you're an owner, including details such as location, price, and images.
-3. **Search for properties** using the filter options (price, location, etc.).
+3. **Search for properties** using the filter options (price, location, etc.) (in progress).
 4. **Contact property owners** using the built-in chat (in progress).
 5. **Manage properties** with CRUD functionalities (edit, delete).
 
