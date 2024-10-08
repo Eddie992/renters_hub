@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 
+# Form for new property post
 class PropertyPostForm(forms.ModelForm):
     class Meta:
         model = PropertyPost
