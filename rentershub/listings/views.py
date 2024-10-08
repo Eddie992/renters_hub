@@ -69,3 +69,4 @@ class PropertyDetailView(DetailView):
     model = PropertyPost
     template_name = 'listings/templates/property_detail.html'
     context_object_name = 'property'
+    
