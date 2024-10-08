@@ -8,5 +8,3 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ("email", "first_name", "last_name","phone_number", "age", "gender", "city",)
 
-
-
