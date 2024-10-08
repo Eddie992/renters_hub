@@ -23,3 +23,5 @@ class SignUpView(CreateView):
 class HomeView(TemplateView):
     template_name = 'main.html'
 
+
+
